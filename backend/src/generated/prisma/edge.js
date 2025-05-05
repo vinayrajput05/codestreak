@@ -215,7 +215,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/apple/Desktop/Coding/codestreak/backend/prisma/generated/prisma",
+      "value": "/Users/apple/Desktop/Coding/codestreak/backend/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -233,26 +233,27 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
-  "relativePath": "../..",
+  "relativePath": "../../../prisma",
   "clientVersion": "6.7.0",
   "engineVersion": "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres.rfobpoefoamtmwxthrfu:ZFVbhZ7hVgdJ@aws-0-ap-south-1.pooler.supabase.com:5432/postgres"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  ADMIN\n  USER\n}\n\nenum DifficultyLevel {\n  EASY\n  MEDIUM\n  HARD\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  name      String?\n  email     String   @unique\n  image     String?\n  role      UserRole @default(USER)\n  password  String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  problems       Problem[]\n  submissions    Submission[]\n  solvedProblems ProblemSolved[]\n}\n\nmodel Problem {\n  id                 String          @id @default(uuid())\n  title              String\n  description        String?\n  difficulty         DifficultyLevel @default(EASY)\n  tags               String[]\n  userId             String\n  constraints        String\n  hints              String?\n  editorial          String?\n  examples           Json\n  testcases          Json\n  codeSnippets       Json\n  referenceSolutions Json\n  createdAt          DateTime        @default(now())\n  updatedAt          DateTime        @updatedAt\n\n  // Relations\n  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)\n  submissions Submission[]\n  solvedBy    ProblemSolved[]\n}\n\nmodel Submission {\n  id            String   @id @default(uuid())\n  userId        String\n  problemId     String\n  sourceCode    Json\n  language      String\n  stdin         String?\n  stdout        String?\n  stderr        String?\n  compileOutput String?\n  status        String // Accepted, wrong answer\n  memory        String?\n  time          String?\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)\n\n  testCases TestCaseResult[]\n}\n\nmodel TestCaseResult {\n  id            String   @id @default(uuid())\n  submissionId  String\n  testCase      Int\n  passed        Boolean\n  stdout        String?\n  expected      String\n  stderr        String?\n  compileOutput String?\n  status        String\n  memory        String?\n  time          String?\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)\n\n  @@index([submissionId])\n}\n\nmodel ProblemSolved {\n  id        String   @id @default(uuid())\n  userId    String\n  problemId String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)\n\n  @@unique([userId, problemId])\n}\n",
-  "inlineSchemaHash": "d80600366dcca052388736f80ad1739154f86cb371754851ba2b88f030532bcd",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  ADMIN\n  USER\n}\n\nenum DifficultyLevel {\n  EASY\n  MEDIUM\n  HARD\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  name      String?\n  email     String   @unique\n  image     String?\n  role      UserRole @default(USER)\n  password  String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  problems       Problem[]\n  submissions    Submission[]\n  solvedProblems ProblemSolved[]\n}\n\nmodel Problem {\n  id                 String          @id @default(uuid())\n  title              String\n  description        String?\n  difficulty         DifficultyLevel @default(EASY)\n  tags               String[]\n  userId             String\n  constraints        String\n  hints              String?\n  editorial          String?\n  examples           Json\n  testcases          Json\n  codeSnippets       Json\n  referenceSolutions Json\n  createdAt          DateTime        @default(now())\n  updatedAt          DateTime        @updatedAt\n\n  // Relations\n  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)\n  submissions Submission[]\n  solvedBy    ProblemSolved[]\n}\n\nmodel Submission {\n  id            String   @id @default(uuid())\n  userId        String\n  problemId     String\n  sourceCode    Json\n  language      String\n  stdin         String?\n  stdout        String?\n  stderr        String?\n  compileOutput String?\n  status        String // Accepted, wrong answer\n  memory        String?\n  time          String?\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)\n\n  testCases TestCaseResult[]\n}\n\nmodel TestCaseResult {\n  id            String   @id @default(uuid())\n  submissionId  String\n  testCase      Int\n  passed        Boolean\n  stdout        String?\n  expected      String\n  stderr        String?\n  compileOutput String?\n  status        String\n  memory        String?\n  time          String?\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)\n\n  @@index([submissionId])\n}\n\nmodel ProblemSolved {\n  id        String   @id @default(uuid())\n  userId    String\n  problemId String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)\n\n  @@unique([userId, problemId])\n}\n",
+  "inlineSchemaHash": "27d4f542e1cf8f4f81ed165715ea1891d8bbc1362d21d2413f2c8c729c824a09",
   "copyEngine": true
 }
 config.dirname = '/'
