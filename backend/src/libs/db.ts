@@ -1,6 +1,5 @@
-import { PrismaClient } from '../../prisma/generated/prisma';
+import { PrismaClient } from '../generated/prisma';
 
-// Extend the global object type to allow a `prisma` property.
 // This prevents TypeScript errors when accessing `globalThis.prisma`.
 declare global {
   var prisma: PrismaClient | undefined;
