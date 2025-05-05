@@ -1,15 +1,16 @@
 import axios from 'axios';
 
-export const getJudge0LanguageId = (language) => {
-  const languageMap = {
+export const getJudge0LanguageId = (language: string) => {
+  const languageMap: Record<string, number> = {
     PYTHON: 71,
     JAVA: 62,
     JAVASCRIPT: 63,
   };
   return languageMap[language.toUpperCase()] ?? null;
 };
-export const getJudge0LanguageName = (language_id) => {
-  const languageMap = {
+
+export const getJudge0LanguageName = (language_id: number) => {
+  const languageMap: Record<number, string> = {
     71: 'PYTHON',
     62: 'JAVA',
     63: 'JAVASCRIPT',
@@ -17,9 +18,9 @@ export const getJudge0LanguageName = (language_id) => {
   return languageMap[language_id] || 'Unknown';
 };
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const submitBatch = async (submissions) => {
+export const submitBatch = async (submissions: any[]) => {
   try {
     const options = {
       baseURL: process.env.JUDGE0_API_URL,
@@ -43,7 +44,7 @@ export const submitBatch = async (submissions) => {
   }
 };
 
-export const pollBatchResults = async (tokens) => {
+export const pollBatchResults = async (tokens: string[]) => {
   while (true) {
     const options = {
       baseURL: process.env.JUDGE0_API_URL,
@@ -62,7 +63,7 @@ export const pollBatchResults = async (tokens) => {
     const results = data.submissions;
 
     const isAllDone = results.every(
-      (r) => r.status.id !== 1 && r.status.id !== 2,
+      (r: any) => r.status.id !== 1 && r.status.id !== 2,
     );
     if (isAllDone) return results;
     await sleep(1000);

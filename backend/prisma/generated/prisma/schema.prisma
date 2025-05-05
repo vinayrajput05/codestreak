@@ -25,13 +25,6 @@ enum DifficultyLevel {
   HARD
 }
 
-enum ProblemAtributeType {
-  EXAMPLE
-  TESTCASE
-  CODE_SNIPPET
-  REFERENCE_SOLUTION
-}
-
 model User {
   id        String   @id @default(uuid())
   name      String?
@@ -49,38 +42,26 @@ model User {
 }
 
 model Problem {
-  id          String          @id @default(uuid())
-  title       String
-  description String?
-  difficulty  DifficultyLevel @default(EASY)
-  tags        String[]
-  userId      String
-  constraints String
-  hints       String?
-  editorial   String?
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  id                 String          @id @default(uuid())
+  title              String
+  description        String?
+  difficulty         DifficultyLevel @default(EASY)
+  tags               String[]
+  userId             String
+  constraints        String
+  hints              String?
+  editorial          String?
+  examples           Json
+  testcases          Json
+  codeSnippets       Json
+  referenceSolutions Json
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 
   // Relations
-  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  attributes  ProblemAtribute[]
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   submissions Submission[]
   solvedBy    ProblemSolved[]
-}
-
-model ProblemAtribute {
-  id          String              @id @default(uuid())
-  problemId   String
-  type        ProblemAtributeType
-  language    String? // language for example, empty for testcase
-  input       String?
-  output      String?
-  description String?
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
-
-  // Relations
-  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 }
 
 model Submission {

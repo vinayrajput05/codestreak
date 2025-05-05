@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "dev": "tsc-watch --noClear -p . --onSuccess \"node ./dist/index.js\"",
     "start": "node dist/index.js",
     "format": "prettier --write src",
     "prepare": "cd .. && husky backend/.husky"
@@ -29,6 +30,7 @@
     "@types/node": "^22.15.3",
     "husky": "^9.1.7",
     "prettier": "^3.5.3",
+    "tsc-watch": "^6.2.1",
     "typescript": "^5.8.3"
   }
 }

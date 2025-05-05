@@ -141,18 +141,10 @@ exports.Prisma.ProblemScalarFieldEnum = {
   constraints: 'constraints',
   hints: 'hints',
   editorial: 'editorial',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ProblemAtributeScalarFieldEnum = {
-  id: 'id',
-  problemId: 'problemId',
-  type: 'type',
-  language: 'language',
-  input: 'input',
-  output: 'output',
-  description: 'description',
+  examples: 'examples',
+  testcases: 'testcases',
+  codeSnippets: 'codeSnippets',
+  referenceSolutions: 'referenceSolutions',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -233,17 +225,9 @@ exports.DifficultyLevel = exports.$Enums.DifficultyLevel = {
   HARD: 'HARD'
 };
 
-exports.ProblemAtributeType = exports.$Enums.ProblemAtributeType = {
-  EXAMPLE: 'EXAMPLE',
-  TESTCASE: 'TESTCASE',
-  CODE_SNIPPET: 'CODE_SNIPPET',
-  REFERENCE_SOLUTION: 'REFERENCE_SOLUTION'
-};
-
 exports.Prisma.ModelName = {
   User: 'User',
   Problem: 'Problem',
-  ProblemAtribute: 'ProblemAtribute',
   Submission: 'Submission',
   TestCaseResult: 'TestCaseResult',
   ProblemSolved: 'ProblemSolved'

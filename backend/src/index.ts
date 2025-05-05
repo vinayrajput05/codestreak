@@ -3,6 +3,7 @@ import express, { Application } from 'express';
 import cookieParser from 'cookie-parser';
 import errorHandler from './middleware/errorHandler.middleware';
 import authRoutes from './routes/auth.routes';
+import problemRoutes from './routes/problem.routes';
 
 const PORT = process.env.PORT || 8000;
 
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/problems', problemRoutes);
 
 app.use(errorHandler);
 

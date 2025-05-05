@@ -1,14 +1,4 @@
-interface Attribute {
-  id: string;
-  problemId: string;
-  type: 'EXAMPLE' | 'TESTCASE' | 'CODE_SNIPPET' | 'REFERENCE_SOLUTION';
-  langugae?: string;
-  input?: string;
-  output?: string;
-  description?: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { Prisma } from '../../prisma/generated/prisma';
 
 export interface TProblem {
   id: string;
@@ -20,11 +10,13 @@ export interface TProblem {
   constraints: string;
   hints?: string;
   editorial?: string;
+  examples: Prisma.JsonValue;
+  testcases: Prisma.JsonValue;
+  codeSnippets: Prisma.JsonValue;
+  referenceSolutions: Prisma.JsonValue;
   createdAt: Date;
   updatedAt: Date;
-
   user?: User;
-  attributes: Attribute[];
   submissions: Submission[];
   solvedBy: ProblemSolved[];
 }
