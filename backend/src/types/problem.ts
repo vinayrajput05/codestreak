@@ -1,4 +1,4 @@
-import { Prisma } from '../../prisma/generated/prisma';
+import { Prisma } from '../generated/prisma';
 
 export interface TProblem {
   id: string;

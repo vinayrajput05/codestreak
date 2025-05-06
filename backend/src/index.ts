@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.json({ message: 'Hello World' });
 });
 
 app.use('/api/v1/auth', authRoutes);

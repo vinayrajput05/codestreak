@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy:prisma",
     "dev": "tsc-watch --noClear -p . --onSuccess \"node ./dist/index.js\"",
     "start": "node dist/index.js",
     "format": "prettier --write src",
-    "prepare": "cd .. && husky backend/.husky"
+    "prepare": "cd .. && husky backend/.husky",
+    "copy:prisma": "mkdir -p ./dist/generated && cp -r ./src/generated/* ./dist/generated/"
   },
   "keywords": [],
   "author": "",
