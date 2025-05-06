@@ -5,6 +5,7 @@ import errorHandler from './middleware/errorHandler.middleware';
 import authRoutes from './routes/auth.routes';
 import problemRoutes from './routes/problem.routes';
 import executionRoute from './routes/executeCode.routes';
+import serverless from 'serverless-http';
 
 const PORT = process.env.PORT || 8000;
 
@@ -27,4 +28,4 @@ app.listen(PORT, (err) => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-export default app;
+export default serverless(app);
