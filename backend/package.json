@@ -4,11 +4,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && npm run copy:prisma",
-    "dev": "tsc-watch --noClear -p . --onSuccess \"node ../api/index.js\"",
-    "start": "node api/index.js",
+    "dev": "tsc-watch --noClear -p . --onSuccess \"node ./dist/index.js\"",
+    "start": "node dist/index.js",
     "format": "prettier --write src",
     "prepare": "cd .. && husky backend/.husky",
-    "copy:prisma": "mkdir -p ../api/generated && cp -r ./src/generated/* ../api/generated/"
+    "copy:prisma": "mkdir -p ./dist/generated && cp -r ./src/generated/* ./dist/generated/"
   },
   "keywords": [],
   "author": "",
