@@ -28,4 +28,4 @@ app.use(errorHandler);
 //   console.log(`Server running on http://localhost:${PORT}`);
 // });
 
-export default serverless(app);
+export const handler = serverless(app);
