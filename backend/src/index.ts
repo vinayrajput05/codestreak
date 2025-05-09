@@ -24,8 +24,8 @@ app.use('/api/v1/execute-code', executionRoute);
 
 app.use(errorHandler);
 
-// app.listen(PORT, (err) => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
+app.listen(PORT, (err) => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
 
 export const handler = serverless(app);
